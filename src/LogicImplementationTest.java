@@ -74,54 +74,54 @@ public class LogicImplementationTest {
     public void draw() {
         LogicImplementation logic = new LogicImplementation();
         logic.throwChip(Player.P2, 0);
+        logic.throwChip(Player.P1, 1);
+        logic.throwChip(Player.P2, 2);
+        logic.throwChip(Player.P1, 3);
+        logic.throwChip(Player.P2, 4);
+        logic.throwChip(Player.P1, 5);
+        logic.throwChip(Player.P2, 6);
+
         logic.throwChip(Player.P1, 0);
+        logic.throwChip(Player.P2, 1);
+        logic.throwChip(Player.P1, 2);
+        logic.throwChip(Player.P2, 3);
+        logic.throwChip(Player.P1, 4);
+        logic.throwChip(Player.P2, 5);
+        logic.throwChip(Player.P1, 6);
+
         logic.throwChip(Player.P2, 0);
-        logic.throwChip(Player.P1, 0);
+        logic.throwChip(Player.P1, 2);
+        logic.throwChip(Player.P2, 1);
+        logic.throwChip(Player.P1, 4);
+        logic.throwChip(Player.P2, 3);
+        logic.throwChip(Player.P1, 6);
+        logic.throwChip(Player.P2, 5);
+
+        logic.throwChip(Player.P1, 1);
         logic.throwChip(Player.P2, 0);
+        logic.throwChip(Player.P1, 3);
+        logic.throwChip(Player.P2, 2);
+        logic.throwChip(Player.P1, 5);
+        logic.throwChip(Player.P2, 4);
+        logic.throwChip(Player.P1, 6);
+
+
+        logic.throwChip(Player.P2, 0);
+        logic.throwChip(Player.P1, 1);
+        logic.throwChip(Player.P2, 2);
+        logic.throwChip(Player.P1, 3);
+        logic.throwChip(Player.P2, 4);
+        logic.throwChip(Player.P1, 5);
+        logic.throwChip(Player.P2, 6);
+
         logic.throwChip(Player.P1, 0);
-
-        logic.throwChip(Player.P1, 1);
         logic.throwChip(Player.P2, 1);
-        logic.throwChip(Player.P1, 1);
-        logic.throwChip(Player.P2, 1);
-        logic.throwChip(Player.P1, 1);
-        logic.throwChip(Player.P2, 1);
-
-        logic.throwChip(Player.P2, 2);
         logic.throwChip(Player.P1, 2);
-        logic.throwChip(Player.P2, 2);
-        logic.throwChip(Player.P1, 2);
-        logic.throwChip(Player.P2, 2);
-        logic.throwChip(Player.P1, 2);
-
-        logic.throwChip(Player.P1, 3);
         logic.throwChip(Player.P2, 3);
-        logic.throwChip(Player.P1, 3);
-        logic.throwChip(Player.P2, 3);
-        logic.throwChip(Player.P1, 3);
-        logic.throwChip(Player.P2, 3);
-
-        logic.throwChip(Player.P2, 4);
         logic.throwChip(Player.P1, 4);
-        logic.throwChip(Player.P2, 4);
-        logic.throwChip(Player.P1, 4);
-        logic.throwChip(Player.P2, 4);
-        logic.throwChip(Player.P1, 4);
-
-        logic.throwChip(Player.P1, 5);
         logic.throwChip(Player.P2, 5);
-        logic.throwChip(Player.P1, 5);
-        logic.throwChip(Player.P2, 5);
-        logic.throwChip(Player.P1, 5);
-        logic.throwChip(Player.P2, 5);
-
-        logic.throwChip(Player.P2, 6);
-        logic.throwChip(Player.P1, 6);
-        logic.throwChip(Player.P2, 6);
-        logic.throwChip(Player.P1, 6);
-        logic.throwChip(Player.P2, 6);
-        logic.throwChip(Player.P1, 6);
         Result result = logic.throwChip(Player.P1, 6);
+
 
         assertEquals(Gamestate.DRAW, result.gamestate);
     }
