@@ -23,57 +23,52 @@ public class LogicImplementation implements FourWinsLogic {
         return true;
     }
 
-    public boolean hasWon() {
-        for(int i = 0; i < MAX_COLUMN; ++i) {
-            int chipCounter = 0;
-            Chip chipColor = null;
-            for(int j = 0; j < MAX_ROW; ++j) {
-                if(playField[i][j] == Chip.EMPTY) {
-                    chipCounter = 0;
-                } else if(playField[i][j] == chipColor) {
-                    chipCounter++;
-                } else {
-                    chipCounter = 0;
-                    chipColor = playField[i][j];
-                }
-                if(chipCounter == 3) {
-                    return true;
-                }
-            }
+    private boolean checkLine(int startColumn, int startRow, int columnDirection, int rowDirection, Player p){
+        while(isInBounds(startColumn - columnDirection, startRow - rowDirection)){
+            startColumn -= columnDirection;
+            startRow -= rowDirection;
         }
 
-        for(int i = 0; i < MAX_ROW; ++i) {
-            int chipCounter = 0;
-            Chip chipColor = null;
-            for(int j = 0; j < MAX_COLUMN; ++j) {
-                if(playField[j][i] == Chip.EMPTY) {
-                    chipCounter = 0;
-                } else if(playField[j][i] == chipColor) {
-                    chipCounter++;
-                } else {
-                    chipCounter = 0;
-                    chipColor = playField[j][i];
-                }
-                if(chipCounter == 3) {
-                    return true;
-                }
+        Chip chip = (p == Player.P1)? Chip.RED : Chip.YELLOW;
+        int chipCounter = 0;
+        while(isInBounds(startColumn, startRow)){
+            if(playField[startColumn][startRow] == chip) {
+                chipCounter++;
             }
-        }
+            else{
+                chipCounter = 0;
+            }
 
+            if(chipCounter == 4){
+                return true;
+            }
+
+            startColumn += columnDirection;
+            startRow += rowDirection;
+        }
         return false;
+    }
+
+
+
+    private boolean isInBounds(int column, int row) {
+        return column >= 0 && column < MAX_COLUMN && row >= 0 && row < MAX_ROW;
+    }
+
+    public boolean hasWon(int column, int row, Player p) {
+        boolean hasWon = false;
+        hasWon |= checkLine(column, row, 1, 0, p);
+        hasWon |= checkLine(column, row, 0, 1, p);
+        hasWon |= checkLine(column, row, 1, 1, p);
+        hasWon |= checkLine(column, row, -1, 1, p);
+
+        return hasWon;
     }
 
     public boolean isFull(int column) {
         return playField[column][MAX_ROW - 1] != Chip.EMPTY;
     }
 
-    private void updatePlayfield(int column, Player p){
-        int i = 0;
-        while(playField[column][i] != Chip.EMPTY) {
-            i++;
-        }
-        playField[column][i] = p == Player.P1 ? Chip.RED : Chip.YELLOW;
-    }
 
     @Override
     public Result throwChip(Player p, int column) {
@@ -99,9 +94,17 @@ public class LogicImplementation implements FourWinsLogic {
             result.errorstate = Errorstate.FULL_COLUMN;
             return result;
         }
-        updatePlayfield(column, p);
 
-        if(hasWon()) {
+
+
+        int row = 0;
+        while(playField[column][row] != Chip.EMPTY) {
+            row++;
+        }
+        playField[column][row] = p == Player.P1 ? Chip.RED : Chip.YELLOW;
+
+
+        if(hasWon(column, row, p)) {
             result.errorstate = Errorstate.NO_ERROR;
 
             if(p == Player.P1) {

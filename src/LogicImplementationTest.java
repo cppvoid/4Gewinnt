@@ -71,6 +71,56 @@ public class LogicImplementationTest {
     }
 
     @Test
+    public void HasWonAscendingDiagonal() { // /
+        LogicImplementation logic = new LogicImplementation();
+
+        logic.throwChip(Player.P1, 0);
+        logic.throwChip(Player.P2, 1);
+        logic.throwChip(Player.P1, 2);
+        logic.throwChip(Player.P2, 3);
+
+        logic.throwChip(Player.P1, 1);
+        logic.throwChip(Player.P2, 0);
+        logic.throwChip(Player.P1, 3);
+        logic.throwChip(Player.P2, 2);
+
+        logic.throwChip(Player.P1, 0);
+        logic.throwChip(Player.P2, 1);
+        logic.throwChip(Player.P1, 2);
+        logic.throwChip(Player.P2, 3);
+
+        Result result = logic.throwChip(Player.P1, 3);
+        assertEquals(Gamestate.P1_WON, result.gamestate);
+    }
+
+    @Test
+    public void HasWonDescendingDiagonal() { // \
+        LogicImplementation logic = new LogicImplementation();
+
+        logic.throwChip(Player.P1, 0);
+        logic.throwChip(Player.P2, 1);
+        logic.throwChip(Player.P1, 2);
+        logic.throwChip(Player.P2, 3);
+
+        logic.throwChip(Player.P1, 1);
+        logic.throwChip(Player.P2, 0);
+        logic.throwChip(Player.P1, 3);
+        logic.throwChip(Player.P2, 2);
+
+        logic.throwChip(Player.P1, 0);
+        logic.throwChip(Player.P2, 1);
+        logic.throwChip(Player.P1, 2);
+        logic.throwChip(Player.P2, 3);
+
+        logic.throwChip(Player.P1, 1);
+
+        Result result = logic.throwChip(Player.P2, 0);
+        assertEquals(Gamestate.P2_WON, result.gamestate);
+    }
+
+
+
+    @Test
     public void draw() {
         LogicImplementation logic = new LogicImplementation();
         logic.throwChip(Player.P2, 0);
